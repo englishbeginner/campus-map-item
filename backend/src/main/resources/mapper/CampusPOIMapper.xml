@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.mapper.CampusPOIMapper">
+    <select id="listInBounds" parameterType="java.util.Map" resultType="org.example.entity.CampusPOI">
+        SELECT * FROM t_campus_poi
+        WHERE status = 1
+          AND center_lng BETWEEN #{minLng} AND #{maxLng}
+          AND center_lat BETWEEN #{minLat} AND #{maxLat}
+    </select>
+
+    <select id="search" parameterType="java.lang.String" resultType="org.example.entity.CampusPOI">
+        SELECT * FROM t_campus_poi
+        WHERE status = 1
+          AND (name LIKE CONCAT('%', #{keyword}, '%') OR alias LIKE CONCAT('%', #{keyword}, '%'))
+    </select>
+</mapper>

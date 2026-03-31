@@ -1,9 +1,16 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import { resolve } from 'path'
 
 export default defineConfig({
   // 注册Vue插件，支持.vue文件解析
   plugins: [vue()],
+  // 路径别名配置
+  resolve: {
+    alias: {
+      '@': resolve(__dirname, 'src')
+    }
+  },
   // 开发服务器配置（解决跨域）
   server: {
     proxy: {
